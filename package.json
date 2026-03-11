@@ -1,0 +1,25 @@
+{
+  "name": "ryllium",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3003",
+    "prebuild": "node -e \"const fs=require('fs'); for(const d of ['.next','.next-build','out','build']){ try{ if(fs.existsSync(d)) fs.rmSync(d,{recursive:true,force:true}); }catch(e){ console.warn('Cleanup warning for', d, e.message); } }\"",
+    "build": "next build",
+    "start": "next start -p 3003",
+    "export": "next build",
+    "export:build": "next build && node -e \"const fs=require('fs'); const src=['out','.next-build'].find(d=>fs.existsSync(d)); if(!src){console.error('Missing static export dir (out/ or .next-build/)'); process.exit(1);} if(fs.existsSync('build')) fs.rmSync('build',{recursive:true,force:true}); fs.cpSync(src,'build',{recursive:true}); console.log('Static site prepared in build/ from '+src+'/');\"",
+    "postbuild": "node -e \"const fs=require('fs'); const src=['out','.next-build'].find(d=>fs.existsSync(d)); if(!src){console.error('Missing static export dir (out/ or .next-build/)'); process.exit(1);} if(fs.existsSync('build')) fs.rmSync('build',{recursive:true,force:true}); fs.cpSync(src,'build',{recursive:true}); console.log('Static site prepared in build/ from '+src+'/');\"",
+    "build:static": "node -e \"const fs=require('fs'); const src=['out','.next-build'].find(d=>fs.existsSync(d)); if(!src){console.error('Missing static export dir (out/ or .next-build/). Run npm run build first.'); process.exit(1);} if(fs.existsSync('build')) fs.rmSync('build',{recursive:true,force:true}); fs.cpSync(src,'build',{recursive:true}); console.log('Copied '+src+' to build/.');\""
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.9.1",
+    "@sumsub/websdk-react": "^2.6.1",
+    "next": "15.5.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "react-icons": "4.12.0",
+    "react-redux": "^9.2.0"
+  }
+}
